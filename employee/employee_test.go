@@ -1,9 +1,10 @@
 package employee_test
 
 import (
+	"go-factorypattern-company-case/employee"
+
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"go-factorypattern-company-case/employee"
 )
 
 var _ = Describe("Employee", func() {
@@ -19,10 +20,10 @@ var _ = Describe("Employee", func() {
 		})
 
 		It("should return the correct bonus", func() {
-			// TODO Implement the test for the bonus
-			// Salary is 1000
-			// Bonus is 20% of the salary
-			// Bonus is 200
+			empl := employee.NewManager()
+
+			bonus := empl.GetBonus()
+			Expect(bonus).To(Equal(200.0))
 		})
 
 	})
@@ -38,10 +39,10 @@ var _ = Describe("Employee", func() {
 		})
 
 		It("should return the correct bonus", func() {
-			// TODO Implement the test for the bonus
-			// Salary is 500
-			// Bonus is 10% of the salary
-			// Bonus is 50
+			empl := employee.NewStaff()
+
+			bonus := empl.GetBonus()
+			Expect(bonus).To(Equal(50.0))
 		})
 
 	})
@@ -57,16 +58,27 @@ var _ = Describe("Employee", func() {
 		})
 
 		It("should return the correct bonus", func() {
-			// TODO Implement the test for the bonus
-			// Salary is 100
-			// Bonus is 0% of the salary
-			// Bonus is 0
+			empl := employee.NewIntern()
+
+			bonus := empl.GetBonus()
+			Expect(bonus).To(Equal(0.0))
 		})
 	})
 
-	// TODO: Implement the test for the Director object
 	Context("Director Object", func() {
+		It("should return the correct name and salary", func() {
+			empl := employee.NewDirector()
 
+			Expect(empl.GetName()).To(Equal("Director"))
+			Expect(empl.GetSalary()).To(Equal(5000))
+		})
+
+		It("should return the correct bonus", func() {
+			empl := employee.NewDirector()
+
+			bonus := empl.GetBonus()
+			Expect(bonus).To(Equal(1500.0))
+		})
 	})
 
 	Context("Empty Employee", func() {
